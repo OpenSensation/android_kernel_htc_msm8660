@@ -101,7 +101,9 @@ static void msm_cpu_early_suspend(struct early_suspend *h)
 #ifdef CONFIG_SEC_LIMIT_MAX_FREQ
 			lmf_screen_state = false;
 #endif
+#ifndef CONFIG_MSM_MPDEC
 			cpu_down(1);
+#endif
 		}
 		mutex_unlock(&per_cpu(cpufreq_suspend, cpu).suspend_mutex);
 	}
@@ -120,7 +122,9 @@ static void msm_cpu_late_resume(struct early_suspend *h)
 #ifdef CONFIG_SEC_LIMIT_MAX_FREQ
 			lmf_screen_state = true;
 #endif
+#ifndef CONFIG_MSM_MPDEC
 			cpu_up(1);
+#endif
 			}
 		mutex_unlock(&per_cpu(cpufreq_suspend, cpu).suspend_mutex);
 	}
